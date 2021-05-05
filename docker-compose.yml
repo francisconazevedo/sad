@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  sad:
+    image: 'webdevops/php-apache:7.4'
+    container_name: sad
+    restart: always
+    volumes:
+      - ".:/app"
+    working_dir: "/app"
+    ports:
+      - '82:80'
+    networks:
+      - app-network
+  mysql-sad:
+    image: mysql:5.7.22
+    ports:
+      - "3306:3306"
+    volumes:
+      - .dbdata:/var/bin/mysql
+    environment:
+      MYSQL_DATABASE: sad
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,236 @@
+.instagram-wrapper {
+    padding: 20px;
+    margin-bottom: 1em;
+}
+
+.instagram-wrapper, .instagram-photos, .instImgInfo, .instImgInfo > div, .instLike, .instComm {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.instagram-photos > div > a {
+    color: inherit;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.instagram-photos {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    transition: 0.28s ease-in-out;
+    width: 100%;
+}
+
+.instagram-photos > div {
+    height: calc(20vw);
+    max-height: 255px;
+    position: relative;
+    overflow: hidden;
+    width: calc(14vw);
+    border-radius: 9px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .instagram-photos > div {
+        width: calc(20vw);
+    }
+}
+
+@media (min-width: 1281px) and (max-width: 1750px) {
+    .instagram-photos > div {
+        width: calc(18vw);
+    }
+}
+
+@media (min-width: 1460px) {
+    .instagram-photos > div {
+        width: calc(17vw);
+    }
+}
+
+@media (min-width: 1560px) {
+    .instagram-photos > div {
+        width: calc(16vw);
+    }
+}
+
+@media (min-width: 1650px) {
+    .instagram-photos > div {
+        width: calc(15vw);
+    }
+}
+
+@media (min-width: 1650px) {
+    .instagram-photos > div {
+        width: calc(14vw);
+    }
+}
+
+@media (min-width: 1885px) {
+    .instagram-photos > div {
+        width: calc(13vw);
+    }
+}
+
+@media (min-width: 2050px) {
+    .instagram-photos > div {
+        width: calc(12vw);
+    }
+}
+
+@media (min-width: 2230px) {
+    .instagram-photos > div {
+        width: calc(11vw);
+    }
+}
+
+.instagram-photos .instImg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    -webkit-transition: 0.42s ease;
+    -o-transition: 0.42s ease;
+    transition: 0.42s ease;
+}
+
+.instagram-photos > div p {
+    color: white;
+    font-size: 28px;
+    line-height: 42px;
+    margin: 0 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.instImgInfo {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    position: relative;
+    height: 100%;
+    -webkit-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    transition: 0.4s ease;
+    z-index: 1;
+}
+
+.instImgInfo:hover {
+    opacity: 1;
+}
+
+.instImgInfo > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.instImgInfo span {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-size: 100%;
+}
+
+.instLike span {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjMuMjE4IiBoZWlnaHQ9IjIwLjc3NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gPGc+ICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+ICA8cmVjdCBmaWxsPSJub25lIiBpZD0iY2FudmFzX2JhY2tncm91bmQiIGhlaWdodD0iNDAyIiB3aWR0aD0iNTgyIiB5PSItMSIgeD0iLTEiLz4gPC9nPiA8Zz4gIDx0aXRsZT5MYXllciAxPC90aXRsZT4gIDxwYXRoIGlkPSJzdmdfMSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNmZmZmZmYiIGQ9Im0xMS42MDgsMjAuNzc2Yy0yMi42NDcsLTEyLjM1NCAtNi4yNjgsLTI3LjcxMyAwLC0xNy4zNjljNi4yNjksLTEwLjM0NCAyMi42NDksNS4wMTUgMCwxNy4zNjl6Ii8+IDwvZz48L3N2Zz4=);
+}
+
+.instComm span {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDx0aXRsZS8+IDxnPiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+IDwvZz4gPGc+ICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+ICA8cGF0aCBmaWxsPSIjZmZmZmZmIiBpZD0iT3ZhbCAyNDcgY29weSIgZD0ibTYuNSwxNGMtMC43NjgxOSwwIC0xLjUwNTI2LC0wLjEwMjUxIC0yLjE4OTM0LC0wLjI5MDcxYy0wLjgyMjgyLDAuNjIzMjkgLTIuMTI1MzMsMS40MjE4MSAtMy4zOTgwNiwxLjQyMTgxYzAuNjM5MTYsLTAuNjA0OTcgMC44NTk4NiwtMS43MjgwNiAwLjkyNjUyLC0yLjY0NjAzYy0xLjEzODIsLTAuOTAwNTUgLTEuODM5MTIsLTIuMTI5ODUgLTEuODM5MTIsLTMuNDg1MDdjMCwtMi43NjE0MiAyLjkxMDE1LC01IDYuNSwtNWMzLjU4OTg1LDAgNi41LDIuMjM4NTggNi41LDVjMCwyLjc2MTQyIC0yLjkxMDE1LDUgLTYuNSw1em0tMS4xNTQ3LC0xMC44NDU0NGMxLjEyNjQ4LC0wLjcyMDk1IDIuNTc0NzYsLTEuMTU0NTYgNC4xNTQ3LC0xLjE1NDU2YzMuNTg5ODUsMCA2LjUsMi4yMzg1OCA2LjUsNWMwLDAuOTA2MDcgLTAuMzEzMzEsMS43NTU4NSAtMC44NjExMywyLjQ4ODczYy0wLjAyMywwLjg3Njg4IDAuMDQwMywyLjc4MjcyIDAuOTQ4NTMsMy42NDIzN2MtMS4yNzM5MywwIC0yLjU3NzY5LC0wLjgwMDAzIC0zLjQwMDM4LC0xLjQyMzU3YzAuODI2MzMsLTAuOTAyODggMS4zMTI5OCwtMi4wMTA1NSAxLjMxMjk4LC0zLjIwNzUzYzAsLTMuMDM3NTcgLTMuMTM0MDEsLTUuNSAtNywtNS41Yy0wLjU3MDA1LDAgLTEuMTI0MTgsMC4wNTM1NCAtMS42NTQ3LDAuMTU0NTZ6bTAsMCIvPiA8L2c+PC9zdmc+);
+}
+
+.instagramArrows {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    display: none;
+    height: 284px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-transition: 0.32s;
+    -o-transition: 0.32s;
+    transition: 0.32s;
+    width: 100%;
+}
+
+.instagramArrows span {
+    height: 46px;
+    width: 46px;
+    background-color: black;
+    opacity: 0.9;
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    -webkit-transition: 0.26s;
+    -o-transition: 0.26s;
+    transition: 0.26s;
+}
+
+.instagramArrows span:nth-of-type(1) {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxnPiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+IDwvZz4gPGc+ICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+ICA8cGF0aCBpZD0ic3ZnXzEiIGZpbGw9IiNmZmZmZmYiIGQ9Im03LjcwMSwxNC4yNzZsOS41ODYsLTkuNTg1YzAuODc5LC0wLjg3OCAyLjMxNywtMC44NzggMy4xOTUsMGwwLjgwMSwwLjhjMC44NzgsMC44NzcgMC44NzgsMi4zMTYgMCwzLjE5NGwtNy4zMTUsNy4zMTVsNy4zMTUsNy4zMTVjMC44NzgsMC44NzggMC44NzgsMi4zMTcgMCwzLjE5NGwtMC44MDEsMC44Yy0wLjg3OCwwLjg3OSAtMi4zMTYsMC44NzkgLTMuMTk1LDBsLTkuNTg2LC05LjU4N2MtMC40NzIsLTAuNDcgLTAuNjgxLC0xLjEwMiAtMC42NDcsLTEuNzIyYy0wLjAzNCwtMC42MiAwLjE3NSwtMS4yNTIgMC42NDcsLTEuNzI0eiIvPiA8L2c+PC9zdmc+);
+}
+
+.instagramArrows span:nth-of-type(2) {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+IDxnPiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+IDwvZz4gPGc+ICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+ICA8cGF0aCBpZD0ic3ZnXzEiIGZpbGw9IiNmZmZmZmYiIGQ9Im0yNC4yOTEsMTQuMjc2bC05LjU4NiwtOS41ODZjLTAuODc4LC0wLjg3OCAtMi4zMTcsLTAuODc4IC0zLjE5NSwwbC0wLjgsMC44Yy0wLjg3OCwwLjg3NyAtMC44NzgsMi4zMTYgMCwzLjE5NGw3LjMxNCw3LjMxNmwtNy4zMTUsNy4zMTVjLTAuODc4LDAuODc4IC0wLjg3OCwyLjMxNyAwLDMuMTk0bDAuOCwwLjhjMC44NzgsMC44NzkgMi4zMTcsMC44NzkgMy4xOTUsMGw5LjU4NiwtOS41ODdjMC40NzIsLTAuNDcxIDAuNjgyLC0xLjEwMyAwLjY0NywtMS43MjNjMC4wMzYsLTAuNjE5IC0wLjE3NCwtMS4yNTEgLTAuNjQ2LC0xLjcyM3oiLz4gPC9nPjwvc3ZnPg==);
+}
+
+@media (min-width: 992px) {
+    .instagram-photos > div:hover .instImg {
+        -webkit-transition: 0.62s ease;
+        -o-transition: 0.62s ease;
+        transition: 0.62s ease;
+    }
+}
+
+@media (max-width: 991px) {
+    .instagram-wrapper {
+        overflow: hidden;
+        width: 100%;
+        height: 320px;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .instagram-photos {
+        position: absolute;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        width: auto;
+    }
+
+    .instagram-photos > div {
+        width: 270px;
+        height: 270px;
+        margin: 6px;
+    }
+
+    .instagramArrows {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+}
