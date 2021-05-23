@@ -4,7 +4,7 @@
 @section('header-title', 'Gerenciar Turmas')
 
 @section('card-tools')
-    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('gestor.turmas.add') }}">
+    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('turmas.add') }}">
         <i class="fas fa-plus" aria-hidden="true"></i> Inserir CSV
     </a>
     <button class="fa fa-save btn btn-success content animate__animated animate__flipInX">
