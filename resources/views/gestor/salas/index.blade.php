@@ -12,34 +12,22 @@
 @section('content')
     <div class="card-body">
 
-        <!----------------- Busca ----------------->
-{{--        <form class="mt-2 mb-4" accept-charset="UTF-8" method="get"--}}
-{{--              action="{{ route('gestor.forma_pagamentos.index') }}">--}}
-{{--            <div class="col-md-6">--}}
-{{--                <div class="input-group mb-3">--}}
-{{--                    <input name="nome" placeholder="Pesquisa por nome" class="form-control"--}}
-{{--                           style="min-width: 120px" type="text" value="{{ request()->query('nome') }}">--}}
-
-{{--                    <div class="input-group-append">--}}
-{{--                        <button class="btn btn-default ml-2 table-search"><i class="fa fa-search"></i></button>--}}
-{{--                        <a class="btn btn-default ml-1" href="{{ route('gestor.forma_pagamentos.index') }}">Limpar</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </form>--}}
-        <!---------------- / Busca ---------------->
-
-        <div class="table-responsive">
+        <div class="table-responsive" style="text-align: center">
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>Nome</th>
+                    <th>Sala</th>
+                    <th>Número de cadeiras</th>
+                    <th>Acessibilidade</th>
+                    <th>Qualidade</th>
                 </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>teste</td>
-
+                        <td>101</td>
+                        <td>100</td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td>1</td>
                     </tr>
                 </tbody>
             </table>
