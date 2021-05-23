@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-class GestorController extends Controller
+class SalaController extends Controller
 {
     public function index() {
-        return view('gestor.gestor.index');
+        return view('gestor.index');
     }
 
     public function salas()
