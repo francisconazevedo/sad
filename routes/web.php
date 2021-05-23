@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'GestorController@index')->name('home');
-Route::get('/salas', 'GestorController@salas')->name('gestor.salas.index');
-Route::get('/adicionar-salas', 'GestorController@addSalas')->name('gestor.salas.add');
-Route::get('/turmas', 'GestorController@turmas')->name('gestor.turmas.index');
-Route::get('/adicionar-turmas', 'GestorController@addTurmas')->name('gestor.turmas.add');
+Route::get('/salas', 'SalaController@salas')->name('salas.index');
+Route::get('/adicionar-salas', 'SalaController@addSalas')->name('salas.add');
+Route::get('/turmas', 'TurmaController@turmas')->name('turmas.index');
+Route::get('/adicionar-turmas', 'TurmaController@addTurmas')->name('turmas.add');

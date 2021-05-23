@@ -16,14 +16,14 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('gestor.salas.index') }}" class="nav-link">
+                    <a href="{{ route('salas.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Salas</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('gestor.turmas.index') }}" class="nav-link">
+                    <a href="{{ route('turmas.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Turmas</p>
                     </a>
