@@ -13,4 +13,5 @@
 
 Route::get('/', 'GestorController@index')->name('home');
 Route::get('/salas', 'GestorController@salas')->name('gestor.salas.index');
+Route::get('/adicionar-salas', 'GestorController@addSalas')->name('gestor.salas.add');
 

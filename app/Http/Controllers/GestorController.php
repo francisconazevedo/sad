@@ -13,4 +13,10 @@ class GestorController extends Controller
         return view('gestor.salas.index');
 
     }
+
+    public function addSalas()
+    {
+        return view('gestor.salas.add');
+
+    }
 }
