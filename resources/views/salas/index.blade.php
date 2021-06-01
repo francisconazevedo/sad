@@ -4,7 +4,7 @@
 @section('header-title', 'Gerenciar Salas')
 
 @section('card-tools')
-    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('salas.add') }}">
+    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('salas.create') }}">
         <i class="fas fa-plus" aria-hidden="true"></i> Cadastrar
     </a>
 @endsection
