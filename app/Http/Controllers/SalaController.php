@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sala;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class SalaController extends Controller
 {
     public function index()
     {
-        return view('salas.index');
+        $salas = Sala::all();
+        return view('salas.index', compact('salas'));
     }
 
     public function create()
@@ -37,7 +37,7 @@ class SalaController extends Controller
                 // Montar registro com valores indexados pelo cabecalho
                 $registro = array_combine($cabecalho, $linha);
 
-                $sala = Sala::create([
+                $sala = Sala::firstOrCreate([
                     'id_sala' => $registro['id_sala'],
                     'numero_cadeiras' => $registro['numero_cadeiras'],
                     'acessivel' => $registro['acessivel'],
@@ -47,16 +47,7 @@ class SalaController extends Controller
             }
             fclose($f);
         }
-        return $return = 'sucesso!';
-    }
-
-    public function turmas()
-    {
-        return view('turmas.index');
-    }
-
-    public function addTurmas()
-    {
-        return view('turmas.add');
+        $return = ['code'=> 200, 'message'=> 'Success!'];
+        return view('salas.index', compact('return'));
     }
 }

@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sala;
+use Illuminate\Http\Request;
+
 class TurmaController extends Controller
 {
-    public function index() {
-        return view('gestor.index');
-    }
-
-    public function salas()
+    public function create()
     {
-        return view('salas.index');
-    }
-
-    public function addSalas()
-    {
-        return view('salas.add');
+        return view('turmas.create');
     }
 
     public function turmas()
@@ -23,8 +17,29 @@ class TurmaController extends Controller
         return view('turmas.index');
     }
 
-    public function addTurmas()
+
+    public function store(Request $request)
     {
-        return view('turmas.add');
+        $delimitador = ',';
+        $cerca = '"';
+
+        $f = fopen('/tmp/'.$request->file('salas')->getFilename(), 'r');
+        if ($f) {
+            // Ler cabecalho do arquivo
+            $cabecalho = fgetcsv($f, 0, $delimitador);
+
+            while (!feof($f)) {
+                // Ler uma linha do arquivo
+                $linha = fgetcsv($f, 0, $delimitador, $cerca);
+                if (!$linha) {
+                    continue;
+                }
+                // Montar registro com valores indexados pelo cabecalho
+                $registro = array_combine($cabecalho, $linha);
+                $listaTurmas[] = $registro;
+            }
+            fclose($f);
+        }
+        return view('turmas.index', compact('listaTurmas')) ;
     }
 }

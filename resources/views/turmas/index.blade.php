@@ -4,7 +4,7 @@
 @section('header-title', 'Gerenciar Turmas')
 
 @section('card-tools')
-    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('turmas.add') }}">
+    <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('turmas.create') }}">
         <i class="fas fa-plus" aria-hidden="true"></i> Inserir CSV
     </a>
     <button class="fa fa-save btn btn-success content animate__animated animate__flipInX">
@@ -12,6 +12,7 @@
     </button>
 @endsection
 
+<?php dd($listaTurmas) ?>
 @section('content')
     <div class="card-body">
 

@@ -23,12 +23,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($salas as $sala)
+
                     <tr>
-                        <td>101</td>
-                        <td>100</td>
-                        <td><i class="fa fa-check"></i></td>
-                        <td>1</td>
+                        <td>{{$sala['id_sala']}}</td>
+                        <td>{{$sala['numero_cadeiras']}}</td>
+                        <td><?= $sala['acessivel'] == 1 ? '<i class="fa fa-check"></i>' : '' ?>
+                        </td>
+                        <td>{{$sala['qualidade']}}</td>
                     </tr>
+                @endforeach
+
                 </tbody>
             </table>
         </div>
