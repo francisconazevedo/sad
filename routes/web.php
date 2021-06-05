@@ -15,6 +15,6 @@ Route::get('/', 'GestorController@index')->name('home');
 Route::get('/salas', 'SalaController@index')->name('salas.index');
 Route::get('/salas/create', 'SalaController@create')->name('salas.create');
 Route::post('/salas', 'SalaController@store')->name('salas.store');
-Route::get('/turmas', 'TurmaController@turmas')->name('turmas.index');
+Route::get('/turmas', 'TurmaController@index')->name('turmas.index');
 Route::get('/turmas/create', 'TurmaController@create')->name('turmas.create');
 Route::post('/turmas', 'TurmaController@store')->name('turmas.store');
