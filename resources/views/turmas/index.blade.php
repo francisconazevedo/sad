@@ -31,24 +31,26 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($listaTurmas as $turma)
                 <tr>
-                    <td>COMP0311</td>
-                    <td>Prof T</td>
-                    <td>2M12 - 4M12</td>
-                    <td>100</td>
-                    <td>EC</td>
-                    <td>5°</td>
+                    <td>{{$turma['disciplina']}}</td>
+                    <td>{{$turma['professor']}}</td>
+                    <td>{{$turma['dias_horario']}}</td>
+                    <td>{{$turma['numero_alunos']}}</td>
+                    <td>{{$turma['curso']}}</td>
+                    <td>{{$turma['periodo']}}°</td>
                     <td><i class="fa fa-check"></i></td>
-                    <td>0</td>
+                    <td>{{$turma['qualidade']}}</td>
 
-                    <td>
+                    <td> {{$turma['id_sala_turma'] ?? 'sem sala'}}
                         <select class="form-control">
-                            <option value="">-- Sala --</option>
-                            <option value="A">Sala A</option>
-                            <option value="B">Sala B</option>
+                            @foreach($salas as $sala)
+                            <option value="{{$sala['id_sala']}}">Sala {{$sala['id_sala']}}</option>
+                            @endforeach
                         </select>
                     </td>
                 </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
