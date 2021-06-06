@@ -31,7 +31,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($listaTurmas as $turma)
+                @foreach($alocacao['turmas'] as $turma)
                 <tr>
                     <td>{{$turma['disciplina']}}</td>
                     <td>{{$turma['professor']}}</td>
@@ -44,7 +44,7 @@
 
                     <td> {{$turma['id_sala_turma'] ?? 'sem sala'}}
                         <select class="form-control">
-                            @foreach($salas as $sala)
+                            @foreach($alocacao['salas'] as $sala)
                             <option value="{{$sala['id_sala']}}">Sala {{$sala['id_sala']}}</option>
                             @endforeach
                         </select>

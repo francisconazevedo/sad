@@ -43,23 +43,15 @@ class TurmaController extends Controller
             fclose($f);
         }
         $salas = Sala::all();
-        $turmasInseridas = $listaTurmas;
-        $salasSemAlocacao = $salas;
-        $alocacao = $this->alocacaoSalas($turmasInseridas, $salasSemAlocacao);
+        $alocacao = $this->alocacaoSalas($listaTurmas, $salas);
 
-        dd($alocacao);
-        return view('turmas.index', compact('listaTurmas', 'salas')) ;
+        return view('turmas.index', compact('alocacao')) ;
     }
 
-    private function alocacaoSalas($turmasInseridas, $salasSemAlocacao){
-
-        set_time_limit(0);
-        $listaTurmas = $turmasInseridas;
-        $salas = $salasSemAlocacao;
+    private function alocacaoSalas($listaTurmas, $salas){
 
         $salaSelecionada = $salas[0];
         foreach ($listaTurmas as $key=>$turma){
-            $encontrouSala = false;
             foreach ($salas as $keysala=>$sala){
                 if ((abs($sala['numero_cadeiras'] - $turma['numero_alunos']) <=
                         abs($salaSelecionada['numero_cadeiras'] - $turma['numero_alunos'])) &&
@@ -76,7 +68,6 @@ class TurmaController extends Controller
                                 }
                             }
                             if (!$inarray){
-                                $encontrouSala = true;
                                 $salaSelecionada = $sala;
                                 $salas[$keysala]['horarios_ocupados'] == null ?
                                     $salas[$keysala]['horarios_ocupados'] = $turma['dias_horario'] :
@@ -87,14 +78,7 @@ class TurmaController extends Controller
                     }
                 }
             }
-            if (!$encontrouSala){
-                $turmaPrioridade = $turma;
-                unset($turmasInseridas[$key]);
-                array_unshift($turmasInseridas, $turma);
-                $this->alocacaoSalas($turmasInseridas, $salasSemAlocacao);
-                var_dump($turma);
-            }
         }
-        return ['listaTurmas' => $listaTurmas, ''];
+        return ['turmas' => $listaTurmas, 'salas'=> $salas];
     }
 }
