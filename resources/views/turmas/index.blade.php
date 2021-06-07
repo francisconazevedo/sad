@@ -32,7 +32,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($alocacao['turmas'] as $key => $turma)
+                @foreach($turmas as $key => $turma)
                 <tr>
                     <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
                     <td id="professor<?=$key?>">{{$turma['professor']}}</td>

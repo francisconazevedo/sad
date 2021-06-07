@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sala;
 use App\Models\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TurmaController extends Controller
 {
@@ -15,10 +16,8 @@ class TurmaController extends Controller
 
     public function index()
     {
-        $listaTurmas = Turma::all();
-        $salas = Sala::all();
-        $alocacao = ['turmas'=> $listaTurmas, 'salas'=> $salas];
-        return view('turmas.index', compact('alocacao'));
+        $turmas = Turma::all();
+        return view('turmas.index', compact('turmas'));
     }
 
 
@@ -48,7 +47,8 @@ class TurmaController extends Controller
         $alocacao = $this->alocacaoSalas($listaTurmas, $salas);
         $this->salvarTurmas($alocacao['turmas']);
 
-        return view('turmas.index', compact('alocacao')) ;
+        $turmas = Turma::all();
+        return view('turmas.index', compact('turmas')) ;
     }
 
     private function alocacaoSalas($listaTurmas, $salas){
@@ -85,11 +85,31 @@ class TurmaController extends Controller
         return ['turmas' => $listaTurmas, 'salas'=> $salas];
     }
 
-    public function salvarTurmas($listaTurmas){
-        foreach ($listaTurmas as $turma){
-            $turma = Turma::updateOrCreate($turma);
-            $idTurma = $turma->save();
-            dd($turma);
+    public function salvarTurmas($listaTurmas)
+    {
+        try {
+            DB::beginTransaction();
+
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            DB::table('turmas')->truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            foreach ($listaTurmas as $turma) {
+                $newTurma = new Turma();
+                $newTurma->disciplina = $turma['disciplina'];
+                $newTurma->professor = $turma['professor'];
+                $newTurma->dias_horario = $turma['dias_horario'];
+                $newTurma->numero_alunos = $turma['numero_alunos'];
+                $newTurma->curso = $turma['curso'];
+                $newTurma->periodo = $turma['periodo'];
+                $newTurma->acessibilidade = $turma['acessibilidade'];
+                $newTurma->qualidade = $turma['qualidade'];
+                $newTurma->id_sala_turma = $turma['id_sala_turma'] ?? null;
+                $newTurma->save();
+            }
+
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            dd($exception->getMessage());
         }
     }
 }

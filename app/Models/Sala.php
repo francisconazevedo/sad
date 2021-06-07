@@ -22,4 +22,7 @@ class Sala extends Model
         'id_sala', 'numero_cadeiras', 'acessivel', 'qualidade'
     ];
 
+    public function turmas(){
+        return $this->hasMany('App\Turmas','id_sala_turma', 'id_sala');
+    }
 }
