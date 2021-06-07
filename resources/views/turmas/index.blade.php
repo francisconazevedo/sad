@@ -50,7 +50,13 @@
                     </td>
                     <td id="qualidade<?=$key?>">{{$turma['qualidade']}}</td>
 
-                    <td id="id_sala_turma<?=$key?>"> {{$turma['id_sala_turma'] ?? 'sem sala'}}</td>
+                    <td id="id_sala_turma<?=$key?>">
+                        @if(!empty($turma['id_sala_turma']))
+                            <a href="#" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$turma['id_sala_turma']}}</a>
+                        @else
+                            Sem sala
+                        @endif
+                    </td>
                     <td>
                         <button type="button" onclick="getData(<?= $key ?>)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">
                             <i class="fas fa-edit"></i>
@@ -94,6 +100,72 @@
                 </div>
             </div>
         </div>
+            <div class="modal fade" id="infoSalas" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Informações da Sala #501</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+
+                                        <th style="width: 12%;">Capacidade</th>
+                                        <th>Acessibilidade</th>
+                                        <th>Qualidade</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>100</td>
+                                        <td><i class='fa fa-check'></i></td>
+                                        <td>1</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h5>Turmas Alocadas</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+
+                                        <th style="width: 12%;">Disciplina</th>
+                                        <th>Professor</th>
+                                        <th>Curso</th>
+                                        <th>Período</th>
+                                        <th>Dias e horários</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>COMP0311</td>
+                                        <td>Prof T</td>
+                                        <td>EC</td>
+                                        <td>5°</td>
+                                        <td>2M12-4M12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP0213</td>
+                                        <td>Prof C</td>
+                                        <td>SI</td>
+                                        <td>5°</td>
+                                        <td>3T56-5T56</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
     <!-- Modal -->
 
