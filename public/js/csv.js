@@ -9,6 +9,26 @@ function getData(id){
         },
         success: function (response) {
             console.log(response)
+            var string = "";
+            $('#tabelaSalas').empty();
+
+            for(i=0;i<response.length;i++) {
+                var acessivel;
+                if (response[i]['acessivel'] == 1) {
+                    acessivel = "<i class='fa fa-check'></i>"
+                } else {
+                    acessivel = "<i class='fas fa-times'></i>"
+                }
+                string += [`<tr>
+                                <td><input type="radio" name="sala" value="${response[i]['id_sala']}"></td>
+                                <td>${response[i]['id_sala']}</td>
+                                <td>${response[i]['numero_cadeiras']}</td>
+                                <td>${acessivel}</td>
+                                <td>${response[i]['qualidade']}</td>
+                            </tr>
+                        `];
+            }
+            $('#tabelaSalas').append(string);
         }
     });
 }

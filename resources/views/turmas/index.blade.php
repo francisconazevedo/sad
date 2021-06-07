@@ -40,8 +40,9 @@
                     <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
                     <td id="curso<?=$key?>">{{$turma['curso']}}</td>
                     <td id="período<?=$key?>">{{$turma['período']}}°</td>
-                    <td id="acessibilidade<?=$key?>">
-                        @if($turma['acessibilidade'] == 0)
+                    <td id="acessibilidade<?=$key?>" style="display: none">{{$turma['acessibilidade']}}</td>
+                    <td>
+                        @if($turma['acessibilidade'] == 1)
                             <i class='fa fa-check'></i>
                         @else
                             <i class="fas fa-times"></i>
@@ -70,7 +71,20 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sala</th>
+                                        <th style="width: 12%;">Alunos matriculados</th>
+                                        <th>Acessibilidade</th>
+                                        <th>Qualidade</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tabelaSalas">
+                                    </tbody>
+                                </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
