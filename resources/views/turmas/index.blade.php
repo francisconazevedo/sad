@@ -12,7 +12,6 @@
     </button>
 @endsection
 
-<?php dd($listaTurmas) ?>
 @section('content')
     <div class="card-body">
 

@@ -12,9 +12,10 @@ class TurmaController extends Controller
         return view('turmas.create');
     }
 
-    public function turmas()
+    public function index()
     {
-        return view('turmas.index');
+        $listaTurmas = Turma::all();
+        return view('turmas.index', compact('listaTurmas'));
     }
 
 
@@ -40,6 +41,8 @@ class TurmaController extends Controller
             }
             fclose($f);
         }
+        $salas = Sala::all();
+        dd(['salas' => sizeof($salas), 'turmas'=> sizeof($listaTurmas)]);
         return view('turmas.index', compact('listaTurmas')) ;
     }
 }
