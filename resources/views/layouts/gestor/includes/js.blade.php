@@ -51,6 +51,7 @@
 <script src="{{ asset('js/jquery_mask_money.js') }}"></script>
 
 <script src="{{ asset('js/notify.js') }}"></script>
+<script src="{{ asset('js/csv.js') }}"></script>
 @if(Session::has('notify') || Session::has('error'))
     <script>
         $(document).ready(function () {

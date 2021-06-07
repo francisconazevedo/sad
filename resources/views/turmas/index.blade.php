@@ -28,30 +28,146 @@
                     <th>Acessibilidade</th>
                     <th>Qualidade</th>
                     <th>Salas</th>
+                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
+                @foreach($alocacao['turmas'] as $key => $turma)
                 <tr>
-                    <td>COMP0311</td>
-                    <td>Prof T</td>
-                    <td>2M12 - 4M12</td>
-                    <td>100</td>
-                    <td>EC</td>
-                    <td>5°</td>
-                    <td><i class="fa fa-check"></i></td>
-                    <td>0</td>
-
+                    <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
+                    <td id="professor<?=$key?>">{{$turma['professor']}}</td>
+                    <td id="dias_horario<?=$key?>">{{$turma['dias_horario']}}</td>
+                    <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
+                    <td id="curso<?=$key?>">{{$turma['curso']}}</td>
+                    <td id="período<?=$key?>">{{$turma['período']}}°</td>
+                    <td id="acessibilidade<?=$key?>" style="display: none">{{$turma['acessibilidade']}}</td>
                     <td>
-                        <select class="form-control">
-                            <option value="">-- Sala --</option>
-                            <option value="A">Sala A</option>
-                            <option value="B">Sala B</option>
-                        </select>
+                        @if($turma['acessibilidade'] == 1)
+                            <i class='fa fa-check'></i>
+                        @else
+                            <i class="fas fa-times"></i>
+                        @endif
                     </td>
+                    <td id="qualidade<?=$key?>">{{$turma['qualidade']}}</td>
+
+                    <td id="id_sala_turma<?=$key?>">
+                        @if(!empty($turma['id_sala_turma']))
+                            <a href="#" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$turma['id_sala_turma']}}</a>
+                        @else
+                            Sem sala
+                        @endif
+                    </td>
+                    <td>
+                        <button type="button" onclick="getData(<?= $key ?>)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+
                 </tr>
+                @endforeach
                 </tbody>
             </table>
+            <div class="modal fade" id="exampleModalCenter" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Opções de salas</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sala</th>
+                                        <th style="width: 12%;">Alunos matriculados</th>
+                                        <th>Acessibilidade</th>
+                                        <th>Qualidade</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tabelaSalas">
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+            <div class="modal fade" id="infoSalas" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Informações da Sala #501</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+
+                                        <th style="width: 12%;">Capacidade</th>
+                                        <th>Acessibilidade</th>
+                                        <th>Qualidade</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>100</td>
+                                        <td><i class='fa fa-check'></i></td>
+                                        <td>1</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h5>Turmas Alocadas</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+
+                                        <th style="width: 12%;">Disciplina</th>
+                                        <th>Professor</th>
+                                        <th>Curso</th>
+                                        <th>Período</th>
+                                        <th>Dias e horários</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>COMP0311</td>
+                                        <td>Prof T</td>
+                                        <td>EC</td>
+                                        <td>5°</td>
+                                        <td>2M12-4M12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP0213</td>
+                                        <td>Prof C</td>
+                                        <td>SI</td>
+                                        <td>5°</td>
+                                        <td>3T56-5T56</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
+    <!-- Modal -->
 
 @endsection
+

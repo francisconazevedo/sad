@@ -23,7 +23,7 @@ class SalaController extends Controller
         $delimitador = ',';
         $cerca = '"';
 
-        $f = fopen('/tmp/'.$request->file('salas')->getFilename(), 'r');
+        $f = fopen($request->file('salas')->getPathname(), 'r');
         if ($f) {
             // Ler cabecalho do arquivo
             $cabecalho = fgetcsv($f, 0, $delimitador);
@@ -47,7 +47,20 @@ class SalaController extends Controller
             }
             fclose($f);
         }
+        $salas = Sala::all();
         $return = ['code'=> 200, 'message'=> 'Success!'];
-        return view('salas.index', compact('return'));
+        return view('salas.index', compact('salas', 'return'));
     }
+
+    public function salasPossiveis(Request $request){
+        $requisitosSala = $request->all();
+
+        $result = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
+            ->where('qualidade', '>=', $requisitosSala['qualidade'])
+            ->where('numero_cadeiras', '>=', $requisitosSala['numero_cadeiras'])
+           ->get()->toArray();
+
+        return $result;
+    }
+
 }
