@@ -39,7 +39,7 @@
                     <td id="dias_horario<?=$key?>">{{$turma['dias_horario']}}</td>
                     <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
                     <td id="curso<?=$key?>">{{$turma['curso']}}</td>
-                    <td id="período<?=$key?>">{{$turma['período']}}°</td>
+                    <td id="período<?=$key?>">{{$turma['periodo']}}°</td>
                     <td id="acessibilidade<?=$key?>" style="display: none">{{$turma['acessibilidade']}}</td>
                     <td>
                         @if($turma['acessibilidade'] == 1)

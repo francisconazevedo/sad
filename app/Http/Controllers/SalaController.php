@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sala;
+use App\Models\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SalaController extends Controller
 {
@@ -20,36 +22,49 @@ class SalaController extends Controller
 
     public function store(Request $request)
     {
-        $delimitador = ',';
-        $cerca = '"';
 
-        $f = fopen($request->file('salas')->getPathname(), 'r');
-        if ($f) {
-            // Ler cabecalho do arquivo
-            $cabecalho = fgetcsv($f, 0, $delimitador);
+        try {
+            DB::beginTransaction();
 
-            while (!feof($f)) {
-                // Ler uma linha do arquivo
-                $linha = fgetcsv($f, 0, $delimitador, $cerca);
-                if (!$linha) {
-                    continue;
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            DB::table('salas')->truncate();
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+            $delimitador = ',';
+            $cerca = '"';
+
+            $f = fopen($request->file('salas')->getPathname(), 'r');
+            if ($f) {
+                // Ler cabecalho do arquivo
+                $cabecalho = fgetcsv($f, 0, $delimitador);
+
+                while (!feof($f)) {
+                    // Ler uma linha do arquivo
+                    $linha = fgetcsv($f, 0, $delimitador, $cerca);
+                    if (!$linha) {
+                        continue;
+                    }
+                    // Montar registro com valores indexados pelo cabecalho
+                    $registro = array_combine($cabecalho, $linha);
+
+                    $sala = Sala::firstOrCreate([
+                        'id_sala' => $registro['id_sala'],
+                        'numero_cadeiras' => $registro['numero_cadeiras'],
+                        'acessivel' => $registro['acessivel'],
+                        'qualidade' => $registro['qualidade']
+                    ]);
+                    $sala->save();
                 }
-                // Montar registro com valores indexados pelo cabecalho
-                $registro = array_combine($cabecalho, $linha);
-
-                $sala = Sala::firstOrCreate([
-                    'id_sala' => $registro['id_sala'],
-                    'numero_cadeiras' => $registro['numero_cadeiras'],
-                    'acessivel' => $registro['acessivel'],
-                    'qualidade' => $registro['qualidade']
-                ]);
-                $sala->save();
+                fclose($f);
             }
-            fclose($f);
+            $salas = Sala::all();
+            DB::commit();
+            return view('salas.index', compact('salas'));
+
+        }catch (\Exception $exception){
+            DB::rollBack();
+            var_dump('tere');
         }
-        $salas = Sala::all();
-        $return = ['code'=> 200, 'message'=> 'Success!'];
-        return view('salas.index', compact('salas', 'return'));
     }
 
     public function salasPossiveis(Request $request){

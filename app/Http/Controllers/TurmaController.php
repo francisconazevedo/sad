@@ -16,7 +16,9 @@ class TurmaController extends Controller
     public function index()
     {
         $listaTurmas = Turma::all();
-        return view('turmas.index', compact('listaTurmas'));
+        $salas = Sala::all();
+        $alocacao = ['turmas'=> $listaTurmas, 'salas'=> $salas];
+        return view('turmas.index', compact('alocacao'));
     }
 
 
@@ -44,6 +46,7 @@ class TurmaController extends Controller
         }
         $salas = Sala::all();
         $alocacao = $this->alocacaoSalas($listaTurmas, $salas);
+        $this->salvarTurmas($alocacao['turmas']);
 
         return view('turmas.index', compact('alocacao')) ;
     }
@@ -80,5 +83,13 @@ class TurmaController extends Controller
             }
         }
         return ['turmas' => $listaTurmas, 'salas'=> $salas];
+    }
+
+    public function salvarTurmas($listaTurmas){
+        foreach ($listaTurmas as $turma){
+            $turma = Turma::updateOrCreate($turma);
+            $idTurma = $turma->save();
+            dd($turma);
+        }
     }
 }
