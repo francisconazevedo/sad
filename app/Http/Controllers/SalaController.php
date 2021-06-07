@@ -51,4 +51,16 @@ class SalaController extends Controller
         $return = ['code'=> 200, 'message'=> 'Success!'];
         return view('salas.index', compact('salas', 'return'));
     }
+
+    public function salasPossiveis(Request $request){
+        $requisitosSala = $request->all();
+
+        $result = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
+            ->where('qualidade', '>=', $requisitosSala['qualidade'])
+            ->where('numero_cadeiras', '>=', $requisitosSala['numero_cadeiras'])
+           ->get()->toArray();
+
+        return $result;
+    }
+
 }

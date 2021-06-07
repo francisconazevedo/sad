@@ -1,7 +1,7 @@
 function getData(id){
     $.ajax({
         method: 'get',
-        url: "/buscaDadosSalas",
+        url: "/salasPossiveis",
         data: {
             acessibilidade: $('#acessibilidade'+id).text(),
             numero_cadeiras: $('#numero_alunos'+id).text(),
