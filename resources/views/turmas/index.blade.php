@@ -51,7 +51,7 @@
 
                             <td id="id_sala_turma<?=$key?>">
                                 @if(!empty($horario['id_sala']))
-                                    <a href="#" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$horario['horario']}} // {{$horario['id_sala']}}</a>
+                                    <a href="#" onclick="dadosSalas({{$horario['id_sala']}})" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$horario['horario']}} // {{$horario['id_sala']}}</a>
                                 @else
                                     Sem sala
                                 @endif
@@ -104,7 +104,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Informações da Sala #501</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Informações da Sala #<span id="sala_id"></span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -120,12 +120,7 @@
                                         <th>Qualidade</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>100</td>
-                                        <td><i class='fa fa-check'></i></td>
-                                        <td>1</td>
-                                    </tr>
+                                    <tbody id="tabelaSala">
                                     </tbody>
                                 </table>
                             </div>
