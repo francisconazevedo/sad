@@ -11,11 +11,17 @@
 |
 */
 
+use App\Http\Controllers\SalaController;
+
 Route::get('/', 'GestorController@index')->name('home');
 Route::get('/salas', 'SalaController@index')->name('salas.index');
+Route::resource('sala', SalaController::class)->only([
+     'show',
+]);
 Route::get('/salas/create', 'SalaController@create')->name('salas.create');
 Route::post('/salas', 'SalaController@store')->name('salas.store');
 Route::get('/turmas', 'TurmaController@index')->name('turmas.index');
 Route::get('/turmas/create', 'TurmaController@create')->name('turmas.create');
 Route::post('/turmas', 'TurmaController@store')->name('turmas.store');
+Route::get('/salasPossiveis', 'SalaController@salasPossiveis')->name('salas.possiveis');
 Route::get('/salasPossiveis', 'SalaController@salasPossiveis')->name('salas.possiveis');

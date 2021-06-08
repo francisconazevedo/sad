@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Horario;
 use App\Models\Sala;
 use App\Models\Turma;
 use Illuminate\Http\Request;
@@ -43,7 +44,12 @@ class TurmaController extends Controller
             }
             fclose($f);
         }
-        $salas = Sala::all();
+        $salas = Sala::all()->toArray();
+        foreach ($salas as $key=>$sala){
+            $salas[$key]['horarios_ocupados'] = [];
+
+        }
+
         $alocacao = $this->alocacaoSalas($listaTurmas, $salas);
         $this->salvarTurmas($alocacao['turmas']);
 
@@ -51,60 +57,82 @@ class TurmaController extends Controller
         return view('turmas.index', compact('turmas')) ;
     }
 
-    private function alocacaoSalas($listaTurmas, $salas){
+    private function alocacaoSalas($listaTurmas, $salas)
+    {
+        foreach ($listaTurmas as $key => $row) {
+            $numero_alunos[$key] = $row['numero_alunos'];
+            $acessibilidade[$key] = $row['acessibilidade'];
+            $qualidade[$key] = $row['qualidade'];
+        }
 
+        $numero_alunos = array_column($listaTurmas, 'numero_alunos');
+        $acessibilidade = array_column($listaTurmas, 'acessibilidade');
+        $qualidade = array_column($listaTurmas, 'qualidade');
+
+        array_multisort($numero_alunos, SORT_DESC, $acessibilidade, SORT_DESC, $qualidade, SORT_ASC, $listaTurmas);
         $salaSelecionada = $salas[0];
-        foreach ($listaTurmas as $key=>$turma){
-            foreach ($salas as $keysala=>$sala){
-                if ((abs($sala['numero_cadeiras'] - $turma['numero_alunos']) <=
-                        abs($salaSelecionada['numero_cadeiras'] - $turma['numero_alunos'])) &&
-                    $sala['numero_cadeiras'] >= $turma['numero_alunos']
-                ){
-                    if ($turma['acessibilidade'] <= $sala['acessivel']){
-                        if ($turma['qualidade'] <= $sala['qualidade']){
-                            $horarios = explode('-', $turma['dias_horario']);
-                            $inarray = false;
-                            foreach ($horarios as $horario){
-                                if (in_array($horario, explode('-', $sala['horarios_ocupados']))){
-                                    $inarray = true;
-                                    break;
+        foreach ($listaTurmas as $key => $turma) {
+            $listaTurmas[$key]['horarios_com_salas'] = [];
+            $horarios = explode('-', $turma['dias_horario']);
+            foreach ($horarios as $horario) {
+                foreach ($salas as $keysala => $sala) {
+                    if (!in_array($horario, $salas[$keysala]['horarios_ocupados']) &&
+                        !in_array($horario, $listaTurmas[$key]['horarios_com_salas'])
+                    ) {
+                        if ((abs($sala['numero_cadeiras'] - $turma['numero_alunos']) <=
+                                abs($salaSelecionada['numero_cadeiras'] - $turma['numero_alunos'])) &&
+                            $sala['numero_cadeiras'] >= $turma['numero_alunos']
+                        ) {
+                            if ( $turma['acessibilidade'] <= $sala['acessivel']) {
+
+                                if ($turma['qualidade'] >= $sala['qualidade']) {
+                                    $salaSelecionada = $sala;
+                                    $salaencontrada = $keysala;
                                 }
                             }
-                            if (!$inarray){
-                                $salaSelecionada = $sala;
-                                $salas[$keysala]['horarios_ocupados'] == null ?
-                                    $salas[$keysala]['horarios_ocupados'] = $turma['dias_horario'] :
-                                    $salas[$keysala]['horarios_ocupados'].'-'.$turma['dias_horario'];
-                                $listaTurmas[$key]['id_sala_turma'] = $sala['id_sala'];
-                           }
                         }
+
                     }
+                }
+                if ($salaSelecionada) {
+                    $salas[$salaencontrada]['horarios_ocupados'][] = $horario;
+                    $listaTurmas[$key]['id_sala_turma'] = $salaSelecionada['id_sala'];
+                    $listaTurmas[$key]['horarios_com_salas'][] = $horario;
+                    $listaTurmas[$key]['horarios_sala'][] = ['horario' => $horario, 'sala' => $salaSelecionada['id_sala']];
+                    $salaencontrada = false;
+
                 }
             }
         }
-        return ['turmas' => $listaTurmas, 'salas'=> $salas];
+        return ['turmas' => $listaTurmas, 'salas' => $salas];
     }
 
     public function salvarTurmas($listaTurmas)
     {
         try {
             DB::beginTransaction();
-
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             DB::table('turmas')->truncate();
+            DB::table('horarios_salas')->truncate();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             foreach ($listaTurmas as $turma) {
-                $newTurma = new Turma();
-                $newTurma->disciplina = $turma['disciplina'];
-                $newTurma->professor = $turma['professor'];
-                $newTurma->dias_horario = $turma['dias_horario'];
-                $newTurma->numero_alunos = $turma['numero_alunos'];
-                $newTurma->curso = $turma['curso'];
-                $newTurma->periodo = $turma['periodo'];
-                $newTurma->acessibilidade = $turma['acessibilidade'];
-                $newTurma->qualidade = $turma['qualidade'];
-                $newTurma->id_sala_turma = $turma['id_sala_turma'] ?? null;
-                $newTurma->save();
+                $newTurma['disciplina'] = $turma['disciplina'];
+                $newTurma['professor'] = $turma['professor'];
+                $newTurma['dias_horario'] = $turma['dias_horario'];
+                $newTurma['numero_alunos'] = $turma['numero_alunos'];
+                $newTurma['curso'] = $turma['curso'];
+                $newTurma['periodo'] = $turma['periodo'];
+                $newTurma['acessibilidade'] = $turma['acessibilidade'];
+                $newTurma['qualidade'] = $turma['qualidade'];
+                $id = Turma::insertGetId($newTurma);
+                foreach ($turma['horarios_sala'] as $horario){
+                    $newhora = Horario::create([
+                            'horario'=> $horario['horario'],
+                            'id_sala'=> $horario['sala'],
+                            'id_turma'=> $id]
+                    );
+                    $newhora->save();
+                }
             }
 
         } catch (\Exception $exception) {

@@ -78,4 +78,15 @@ class SalaController extends Controller
         return $result;
     }
 
+    public function view($id){
+        dd($id);
+
+        $result = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
+            ->where('qualidade', '>=', $requisitosSala['qualidade'])
+            ->where('numero_cadeiras', '>=', $requisitosSala['numero_cadeiras'])
+            ->get()->toArray();
+
+        return $result;
+    }
+
 }
