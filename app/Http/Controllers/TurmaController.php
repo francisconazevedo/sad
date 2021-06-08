@@ -147,4 +147,14 @@ class TurmaController extends Controller
             dd($exception->getMessage());
         }
     }
+
+    public function view($id = null){
+        $turma = Turma::where('id_turma', $id)->get()->toArray();
+        return $turma;
+    }
+
+    public function alterarSala(){
+
+    }
+
 }

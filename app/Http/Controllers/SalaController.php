@@ -71,12 +71,20 @@ class SalaController extends Controller
     public function salasPossiveis(Request $request){
         $requisitosSala = $request->all();
 
-        $result = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
-            ->where('qualidade', '>=', $requisitosSala['qualidade'])
+        $salas = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
+            ->where('qualidade', '<=', $requisitosSala['qualidade'])
             ->where('numero_cadeiras', '>=', $requisitosSala['numero_cadeiras'])
            ->get()->toArray();
+        foreach ($salas as $key=>$sala){
 
-        return $result;
+            $horarios = Horario::where('horario', '=', $requisitosSala['horario'])
+                ->where('id_sala', '=', $sala['id_sala'])
+                ->get()->toArray();
+            if(count($horarios) > 0){
+                unset($salas[$key]);
+            }
+        }
+        return $salas;
     }
 
     public function view($id = null){
