@@ -54,6 +54,11 @@ class TurmaController extends Controller
         $this->salvarTurmas($alocacao['turmas']);
 
         $turmas = Turma::all();
+
+        foreach($turmas as $key=>$turma){
+            $turmas[$key]['horarios_sala'] = Horario::all()->toArray();
+        }
+
         return view('turmas.index', compact('turmas')) ;
     }
 
