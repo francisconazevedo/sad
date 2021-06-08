@@ -8,7 +8,6 @@ function getData(id){
             qualidade: $('#qualidade'+id).text()
         },
         success: function (response) {
-            console.log(response)
             var string = "";
             $('#tabelaSalas').empty();
 
@@ -59,6 +58,21 @@ function dadosSalas(id){
                         `];
             }
             $('#tabelaSala').append(string);
+
+            var string = "";
+            $('#tabelaTurma').empty();
+            for (i = 0; i < response[0]['horarios_ocupados'].length; i++) {
+                string += [`<tr>
+                                <td>${response[0]['horarios_ocupados'][i]['id_turma'][0]['disciplina']}</td>
+                                <td>${response[0]['horarios_ocupados'][i]['id_turma'][0]['professor']}</td>
+                                <td>${response[0]['horarios_ocupados'][i]['id_turma'][0]['curso']}</td>
+                                <td>${response[0]['horarios_ocupados'][i]['id_turma'][0]['periodo']}</td>
+                                <td>${response[0]['horarios_ocupados'][i]['horario']}</td>
+                            </tr>
+                        `];
+            }
+            $('#tabelaTurma').append(string);
+
         }
     });
 }

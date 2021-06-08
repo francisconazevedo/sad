@@ -135,24 +135,10 @@
                                         <th>Professor</th>
                                         <th>Curso</th>
                                         <th>Período</th>
-                                        <th>Dias e horários</th>
+                                        <th>Horários</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>COMP0311</td>
-                                        <td>Prof T</td>
-                                        <td>EC</td>
-                                        <td>5°</td>
-                                        <td>2M12-4M12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>COMP0213</td>
-                                        <td>Prof C</td>
-                                        <td>SI</td>
-                                        <td>5°</td>
-                                        <td>3T56-5T56</td>
-                                    </tr>
+                                    <tbody id="tabelaTurma">
                                     </tbody>
                                 </table>
                             </div>
