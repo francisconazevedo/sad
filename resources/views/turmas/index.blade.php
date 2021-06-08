@@ -21,49 +21,49 @@
                 <tr>
                     <th>Disciplina</th>
                     <th>Professor</th>
-                    <th>Dias e horários</th>
                     <th style="width: 12%;">Alunos matriculados</th>
                     <th>Curso</th>
                     <th>Período</th>
                     <th>Acessibilidade</th>
                     <th>Qualidade</th>
-                    <th>Salas</th>
+                    <th>Horário // Sala</th>
                     <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($turmas as $key => $turma)
-                <tr>
-                    <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
-                    <td id="professor<?=$key?>">{{$turma['professor']}}</td>
-                    <td id="dias_horario<?=$key?>">{{$turma['dias_horario']}}</td>
-                    <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
-                    <td id="curso<?=$key?>">{{$turma['curso']}}</td>
-                    <td id="período<?=$key?>">{{$turma['periodo']}}°</td>
-                    <td id="acessibilidade<?=$key?>" style="display: none">{{$turma['acessibilidade']}}</td>
-                    <td>
-                        @if($turma['acessibilidade'] == 1)
-                            <i class='fa fa-check'></i>
-                        @else
-                            <i class="fas fa-times"></i>
-                        @endif
-                    </td>
-                    <td id="qualidade<?=$key?>">{{$turma['qualidade']}}</td>
+                    @foreach($turma['horarios_sala'] as $horario)
+                        <tr>
+                            <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
+                            <td id="professor<?=$key?>">{{$turma['professor']}}</td>
+                            <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
+                            <td id="curso<?=$key?>">{{$turma['curso']}}</td>
+                            <td id="período<?=$key?>">{{$turma['periodo']}}°</td>
+                            <td id="acessibilidade<?=$key?>" style="display: none">{{$turma['acessibilidade']}}</td>
+                            <td>
+                                @if($turma['acessibilidade'] == 1)
+                                    <i class='fa fa-check'></i>
+                                @else
+                                    <i class="fas fa-times"></i>
+                                @endif
+                            </td>
+                            <td id="qualidade<?=$key?>">{{$turma['qualidade']}}</td>
 
-                    <td id="id_sala_turma<?=$key?>">
-                        @if(!empty($turma['id_sala_turma']))
-                            <a href="#" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$turma['id_sala_turma']}}</a>
-                        @else
-                            Sem sala
-                        @endif
-                    </td>
-                    <td>
-                        <button type="button" onclick="getData(<?= $key ?>)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </td>
+                            <td id="id_sala_turma<?=$key?>">
+                                @if(!empty($horario['id_sala']))
+                                    <a href="#" data-toggle="modal" data-target="#infoSalas" data-backdrop="false">{{$horario['horario']}} // {{$horario['id_sala']}}</a>
+                                @else
+                                    Sem sala
+                                @endif
+                            </td>
+                            <td>
+                                <button type="button" onclick="getData(<?= $key ?>)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
 
-                </tr>
+                        </tr>
+                    @endforeach
                 @endforeach
                 </tbody>
             </table>
