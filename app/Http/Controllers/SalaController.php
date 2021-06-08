@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Horario;
 use App\Models\Sala;
 use App\Models\Turma;
 use Illuminate\Http\Request;
@@ -78,15 +79,15 @@ class SalaController extends Controller
         return $result;
     }
 
-    public function view($id){
-        dd($id);
-
-        $result = Sala::where('acessivel', '>=', $requisitosSala['acessibilidade'])
-            ->where('qualidade', '>=', $requisitosSala['qualidade'])
-            ->where('numero_cadeiras', '>=', $requisitosSala['numero_cadeiras'])
+    public function view($id = null){
+        $salas = Sala::where('id_sala', '=', $id)
             ->get()->toArray();
 
-        return $result;
+        foreach($salas as $key=>$sala){
+            $salas[$key]['horarios_ocupados'] = Horario::where('id_sala', '=', $sala['id_sala'])->get()->toArray();
+        }
+
+        return $salas;
     }
 
 }
