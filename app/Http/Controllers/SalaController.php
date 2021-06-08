@@ -85,6 +85,9 @@ class SalaController extends Controller
 
         foreach($salas as $key=>$sala){
             $salas[$key]['horarios_ocupados'] = Horario::where('id_sala', '=', $sala['id_sala'])->get()->toArray();
+            foreach ($salas[$key]['horarios_ocupados'] as $keyhora => $horario){
+                $salas[$key]['horarios_ocupados'][$keyhora]['id_turma'] = Turma::where('id_turma', '=', $horario['id_turma'])->get()->toArray();'';
+            }
         }
 
         return $salas;
