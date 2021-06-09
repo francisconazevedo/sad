@@ -84,6 +84,7 @@ class SalaController extends Controller
                 unset($salas[$key]);
             }
         }
+        $salas = array_values($salas);
         return $salas;
     }
 
