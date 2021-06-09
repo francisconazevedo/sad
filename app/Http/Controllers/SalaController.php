@@ -102,4 +102,13 @@ class SalaController extends Controller
         return $salas;
     }
 
+    public function alterarSala(Request $request){
+        $request = $request->all();
+        $horario = Horario::where('id_turma', '=', $request['id_turma'])
+            ->where('horario', '=', $request['horario'])
+            ->update(['id_sala' => $request['id_sala']]);
+        $horario->save();
+
+        return $horario;
+    }
 }
