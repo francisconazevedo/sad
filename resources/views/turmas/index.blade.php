@@ -32,13 +32,7 @@
                 </thead>
                 <tbody>
                 @foreach($turmas as $key => $turma)
-                    <?php $horario_sala = '';
-                    foreach ($turma['horarios_sala'] as $horario) {
-                        $horario_sala .= $horario['horario'] . '//' . $horario['id_sala'] . '<br>';
 
-                        $sala = $horario['id_sala'];
-                    }
-                    ?>
                     <tr>
                         <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
                         <td id="professor<?=$key?>">{{$turma['professor']}}</td>
@@ -56,8 +50,14 @@
                         <td id="qualidade<?=$key?>">{{$turma['qualidade']}}</td>
 
                         <td id="id_sala_turma<?=$key?>">
-                            @if(!empty($sala))
-                                <a href="#" onclick="dadosSalas({{$sala}})" data-toggle="modal" data-target="#infoSalas" data-backdrop="false"><?= $horario_sala ?></a>
+                            @if(!empty($turma['horarios_sala']))
+                                @foreach ($turma['horarios_sala'] as $horario)
+                                    {{$horario['horario']}} //
+                                    <a href="#" onclick="dadosSalas({{$horario['id_sala']}})" data-toggle="modal"
+                                       data-target="#infoSalas"
+                                       data-backdrop="false">{{ $horario['id_sala'] }}</a><br>
+
+                                @endforeach
                             @else
                                 Sem sala
                             @endif
