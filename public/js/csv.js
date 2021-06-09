@@ -82,29 +82,25 @@ function dadosSalas(id){
     });
 }
 
-function submitFormSala(){
+function submitFormSala() {
     var string = "";
     sala = $("input[type='radio'][name='sala']:checked").val();
     horario = $('#horario_id').text()
     turma = $('#turma_id').text()
-    $('#editaSala').empty();
-    string += [`
-                <input type="hidden" id="id_turma" name="id_turma" value="${turma}">
-                <input type="hidden" id="id_sala" name="id_sala" value="${sala}">
-                <input type="hidden" id="horario" name="horario" value="${horario}">
-            `];
-    $('#editaSala').append(string);
 
-    // SÓ DESCOMENTAR QND A FUNÇÃO DE EDITAR ESTIVER PRONTA
-    // $('#editaSala').submit();
+    $("#id_turma").val(turma);
+    $("#id_sala").val(sala);
+    $("#horario").val(horario);
 
 }
+//
+// $('#editaSala').submit(function () {
+//     document.location.href = "/turmas";
+//     return false;
+// });
 
-//triggered when modal is about to be shown
 $('#exampleModalCenter').on('show.bs.modal', function(e) {
 
-    //get data-id attribute of the clicked element
-    var bookId = $(e.relatedTarget).data('turma');
-    //populate the textbox
-    $("#turma_id").text(bookId);
+    var turma = $(e.relatedTarget).data('turma');
+    $("#turma_id").text(turma);
 });

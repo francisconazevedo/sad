@@ -7,9 +7,6 @@
     <a class="btn btn-primary content animate__animated animate__flipInX" href="{{ route('turmas.create') }}">
         <i class="fas fa-plus" aria-hidden="true"></i> Inserir CSV
     </a>
-    <button class="fa fa-save btn btn-success content animate__animated animate__flipInX">
-        Salvar
-    </button>
 @endsection
 
 @section('content')
@@ -96,12 +93,19 @@
                                     </tbody>
                                 </table>
                         </div>
-                            <form id="editaSala" action="#" method="post">
+                            <form id="editaSala" action="{{ route('salas.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" id="id_turma" name="id_turma" value="">
+                                <input type="hidden" id="id_sala" name="id_sala" value="">
+                                <input type="hidden" id="horario" name="horario" value="">
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" onclick="submitFormSala()" class="btn btn-primary">Salvar</button>
+                                </div>
                             </form>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" onclick="submitFormSala()" class="btn btn-primary">Salvar</button>
-                        </div>
+
+
                     </div>
                 </div>
             </div>

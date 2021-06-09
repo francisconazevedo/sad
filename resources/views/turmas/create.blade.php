@@ -8,8 +8,10 @@
     <form action="{{ route('turmas.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="email">*Arquivo CSV</label>
-        <input type="file" name="turmas" class="form-control">
-        <button type="submit" class="fa fa-save btn btn-primary">Salvar</button>
+        <div class="col-md-12">
+            <input type="file" name="turmas" class="form-control">
+        </div>
+        <button style="float: right; margin: 13px;" type="submit" class="fa fa-save btn btn-primary">Salvar</button>
     </form>
 @endsection
 
