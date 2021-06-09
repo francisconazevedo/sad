@@ -31,7 +31,6 @@
                 </thead>
                 <tbody>
                 @foreach($turmas as $key => $turma)
-
                     <tr>
                         <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
                         <td id="professor<?=$key?>">{{$turma['professor']}}</td>
@@ -55,7 +54,7 @@
                                     <a href="#" onclick="dadosSalas({{$horario['id_sala']}})" data-toggle="modal"
                                        data-target="#infoSalas"
                                        data-backdrop="false">{{ $horario['id_sala'] }}</a>
-                                    <a onclick="getData(<?= $key ?>, '{{$horario['horario']}}')" style="margin: 5px;" href="#" data-toggle="modal"
+                                    <a onclick="getData(<?= $key ?>, '{{$horario['horario']}}')" style="margin: 5px;" href="#" data-turma="{{$turma['id_turma']}}" data-toggle="modal"
                                        data-target="#exampleModalCenter"
                                        data-backdrop="false">
                                         <i class="fas fa-edit"></i>
@@ -75,6 +74,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <span id="turma_id" style=" visibility: hidden;"></span>
                             <h5 class="modal-title" id="exampleModalLongTitle">Opções de salas para  o horário #<span id="horario_id"></span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -96,9 +96,11 @@
                                     </tbody>
                                 </table>
                         </div>
+                            <form id="editaSala" action="#" method="post">
+                            </form>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Salvar</button>
+                            <button type="button" onclick="submitFormSala()" class="btn btn-primary">Salvar</button>
                         </div>
                     </div>
                 </div>
