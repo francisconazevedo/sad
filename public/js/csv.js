@@ -12,6 +12,7 @@ function getData(id, horario){
             var string = "";
             $('#tabelaSalas').empty();
             $('#horario_id').text(horario);
+            console.log(response);
             for (i = 0; i < response.length; i++) {
                 var acessivel;
                 if (response[i]['acessivel'] == 1) {
@@ -20,8 +21,8 @@ function getData(id, horario){
                     acessivel = "<i class='fas fa-times'></i>"
                 }
                 string += [`<tr>
-                                <td><input type="radio" name="sala" value="${response[i]['id_sala']}"></td>
-                                <td>${response[i]['id_sala']}</td>
+                                <td><input type="radio" required name="sala" value="${response[i]['id_sala']}"></td>
+                                <td id="sala_sala">${response[i]['id_sala']}</td>
                                 <td>${response[i]['numero_cadeiras']}</td>
                                 <td>${acessivel}</td>
                                 <td>${response[i]['qualidade']}</td>
@@ -80,3 +81,30 @@ function dadosSalas(id){
         }
     });
 }
+
+function submitFormSala(){
+    var string = "";
+    sala = $("input[type='radio'][name='sala']:checked").val();
+    horario = $('#horario_id').text()
+    turma = $('#turma_id').text()
+    $('#editaSala').empty();
+    string += [`
+                <input type="hidden" id="id_turma" name="id_turma" value="${turma}">
+                <input type="hidden" id="id_sala" name="id_sala" value="${sala}">
+                <input type="hidden" id="horario" name="horario" value="${horario}">
+            `];
+    $('#editaSala').append(string);
+
+    // SÓ DESCOMENTAR QND A FUNÇÃO DE EDITAR ESTIVER PRONTA
+    // $('#editaSala').submit();
+
+}
+
+//triggered when modal is about to be shown
+$('#exampleModalCenter').on('show.bs.modal', function(e) {
+
+    //get data-id attribute of the clicked element
+    var bookId = $(e.relatedTarget).data('turma');
+    //populate the textbox
+    $("#turma_id").text(bookId);
+});
