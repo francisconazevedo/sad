@@ -87,7 +87,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Sala</th>
-                                        <th style="width: 12%;">Alunos matriculados</th>
+                                        <th style="width: 12%;">Capacidade</th>
                                         <th>Acessibilidade</th>
                                         <th>Qualidade</th>
                                     </tr>

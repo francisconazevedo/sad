@@ -12,6 +12,8 @@ function getData(id, horario){
             var string = "";
             $('#tabelaSalas').empty();
             $('#horario_id').text(horario);
+            console.log(response);
+            console.log(response.length);
             for (i = 0; i < response.length; i++) {
                 var acessivel;
                 if (response[i]['acessivel'] == 1) {
