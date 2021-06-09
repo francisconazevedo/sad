@@ -27,7 +27,6 @@
                     <th>Acessibilidade</th>
                     <th>Qualidade</th>
                     <th>Horário // Sala</th>
-                    <th>#</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,19 +54,19 @@
                                     {{$horario['horario']}} //
                                     <a href="#" onclick="dadosSalas({{$horario['id_sala']}})" data-toggle="modal"
                                        data-target="#infoSalas"
-                                       data-backdrop="false">{{ $horario['id_sala'] }}</a><br>
+                                       data-backdrop="false">{{ $horario['id_sala'] }}</a>
+                                    <a onclick="getData(<?= $key ?>, '{{$horario['horario']}}')" style="margin: 5px;" href="#" data-toggle="modal"
+                                       data-target="#exampleModalCenter"
+                                       data-backdrop="false">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <br>
 
                                 @endforeach
                             @else
                                 Sem sala
                             @endif
                         </td>
-                        <td>
-                            <button type="button" onclick="getData(<?= $key ?>)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" data-backdrop="false">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                        </td>
-
                     </tr>
                 @endforeach
                 </tbody>
@@ -76,7 +75,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Opções de salas</h5>
+                            <h5 class="modal-title" id="exampleModalLongTitle">Opções de salas para  o horário #<span id="horario_id"></span></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
