@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{$sala['id_sala']}}</td>
                         <td>{{$sala['numero_cadeiras']}}</td>
-                        <td><?= $sala['acessivel'] == 1 ? '<i class="fa fa-check"></i>' : '' ?>
+                        <td><?= $sala['acessivel'] == 1 ? '<i class="fa fa-check"></i>' : '<i class="fas fa-times"></i>' ?>
                         </td>
                         <td>{{$sala['qualidade']}}</td>
                     </tr>
