@@ -16,6 +16,7 @@
             <table class="table table-bordered" style="text-align: center;">
                 <thead>
                 <tr>
+                    <th>Turma</th>
                     <th>Disciplina</th>
                     <th>Professor</th>
                     <th style="width: 12%;">Alunos matriculados</th>
@@ -29,6 +30,7 @@
                 <tbody>
                 @foreach($turmas as $key => $turma)
                     <tr>
+                        <td>{{$turma['id_turma']}}</td>
                         <td id="disciplina<?=$key?>">{{$turma['disciplina']}}</td>
                         <td id="professor<?=$key?>">{{$turma['professor']}}</td>
                         <td id="numero_alunos<?=$key?>">{{$turma['numero_alunos']}}</td>
