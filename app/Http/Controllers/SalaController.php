@@ -113,7 +113,7 @@ class SalaController extends Controller
         $turmas = Turma::all();
 
         foreach($turmas as $key=>$turma){
-            $turmas[$key]['horarios_sala'] = Horario::where('id_turma', '=', $turma['id_turma'])->get()->toArray();
+            $turmas[$key]['horarios_sala'] = Horario::where('id_turma', '=', $turma['id_turma'])->get()->toArray()  ?? [];;
         }
         return view('turmas.index', compact('turmas')) ;
     }
