@@ -23,7 +23,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('turmas.index') }}" class="nav-link">
+                    <a href="/turmas" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Turmas</p>
                     </a>
