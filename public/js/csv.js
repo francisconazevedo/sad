@@ -55,11 +55,14 @@ function getData(id, horario){
 
 
 function dadosSalas(id){
+    document.getElementById('setOpacity').style.opacity = "0.4";
+    $('.modal-content').css('display', 'none');
     $.ajax({
         method: 'get',
         url: "/sala/"+id,
         success: function (response) {
-            console.log(response)
+            $('.modal-content').css('display', 'block');
+            document.getElementById('setOpacity').style.opacity = "1";
             $('#sala_id').text(id);
             var string = "";
             $('#tabelaSala').empty();
