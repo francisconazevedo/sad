@@ -153,8 +153,5 @@ class TurmaController extends Controller
         return $turma;
     }
 
-    public function alterarSala(){
-
-    }
 
 }

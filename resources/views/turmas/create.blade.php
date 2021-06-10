@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <input type="file" name="turmas" class="form-control">
         </div>
-        <button style="float: right; margin: 13px;" type="submit" class="fa fa-save btn btn-primary">Salvar</button>
+        <button style="float: right; margin: 13px;" type="submit" class=" btn btn-primary">Salvar</button>
     </form>
 @endsection
 

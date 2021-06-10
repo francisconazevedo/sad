@@ -93,7 +93,7 @@
                                     </tbody>
                                 </table>
                         </div>
-                            <form id="editaSala" action="{{ route('salas.store') }}" method="POST" enctype="multipart/form-data">
+                            <form id="editaSala" action="/alterarSala" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="id_turma" name="id_turma" value="">
                                 <input type="hidden" id="id_sala" name="id_sala" value="">

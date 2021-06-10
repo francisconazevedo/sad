@@ -109,7 +109,7 @@ class SalaController extends Controller
         $horario = Horario::where('id_turma', '=', $request['id_turma'])
             ->where('horario', '=', $request['horario'])
             ->update(['id_sala' => $request['id_sala']]);
-        $horario->save();
+
         $turmas = Turma::all();
 
         foreach($turmas as $key=>$turma){
