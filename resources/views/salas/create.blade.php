@@ -2,7 +2,7 @@
 @extends('layouts.gestor.gestor')
 
 @section('title', 'Salas - ')
-@section('header-title', 'Cadastrar Novo Produto')
+@section('header-title', 'Gerenciar Salas')
 
 
 @section('content')
