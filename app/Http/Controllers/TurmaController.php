@@ -101,7 +101,7 @@ class TurmaController extends Controller
 
                     }
                 }
-                if ($salaSelecionada) {
+                if ($salaencontrada) {
                     $salas[$salaencontrada]['horarios_ocupados'][] = $horario;
                     $listaTurmas[$key]['id_sala_turma'] = $salaSelecionada['id_sala'];
                     $listaTurmas[$key]['horarios_com_salas'][] = $horario;
