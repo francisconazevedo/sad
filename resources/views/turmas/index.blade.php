@@ -12,7 +12,7 @@
 @section('content')
     <div class="card-body">
 
-        <div class="table-responsive">
+        <div id="setOpacity" class="table-responsive">
             <table class="table table-bordered" style="text-align: center;">
                 <thead>
                 <tr>
@@ -100,8 +100,8 @@
                                 <input type="hidden" id="horario" name="horario" value="">
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" onclick="submitFormSala()" class="btn btn-primary">Salvar</button>
+                                    <button type="button" class="btn btn-secondary cancelar"  data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" onclick="submitFormSala()" class=" salvar btn btn-primary">Salvar</button>
                                 </div>
                             </form>
 

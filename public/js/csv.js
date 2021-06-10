@@ -1,4 +1,16 @@
+$('.close').on('click', () => {
+        $('.modal-content').css('display', 'none');
+    }
+);
+$('.cancelar').on('click', () => {
+        $('.modal-content').css('display', 'none');
+    }
+);
+
 function getData(id, horario){
+    document.getElementById('setOpacity').style.opacity = "0.4";
+    $('.modal-content').css('display', 'none');
+
     $.ajax({
         method: 'get',
         url: "/salasPossiveis",
@@ -9,7 +21,11 @@ function getData(id, horario){
             horario: horario
         },
         success: function (response) {
+
             var string = "";
+            $('.modal-content').css('display', 'block');
+            document.getElementById('setOpacity').style.opacity = "1";
+
             $('#tabelaSalas').empty();
             $('#horario_id').text(horario);
             console.log(response);
@@ -103,4 +119,8 @@ $('#exampleModalCenter').on('show.bs.modal', function(e) {
 
     var turma = $(e.relatedTarget).data('turma');
     $("#turma_id").text(turma);
+});
+
+$(".salvar").click(function() {
+    $(this).html("<img src='/gif/123.gif' style='width: 40%'/>");
 });
