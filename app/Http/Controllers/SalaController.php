@@ -29,6 +29,8 @@ class SalaController extends Controller
 
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             DB::table('salas')->truncate();
+            DB::table('horarios_salas')->truncate();
+            DB::table('turmas')->truncate();
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
             $delimitador = ',';
@@ -108,7 +110,11 @@ class SalaController extends Controller
             ->where('horario', '=', $request['horario'])
             ->update(['id_sala' => $request['id_sala']]);
         $horario->save();
+        $turmas = Turma::all();
 
-        return $horario;
+        foreach($turmas as $key=>$turma){
+            $turmas[$key]['horarios_sala'] = Horario::where('id_turma', '=', $turma['id_turma'])->get()->toArray();
+        }
+        return view('turmas.index', compact('turmas')) ;
     }
 }
